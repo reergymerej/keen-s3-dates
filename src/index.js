@@ -17,6 +17,15 @@ const getValuesInPosition = (arr, index) => {
   return values
 }
 
+export const reduceIntSet = (valueSet) => {
+  if (valueSet.length === 1) {
+    return valueSet[0]
+  } else if (valueSet.length === 10) {
+    return '?'
+  }
+  return `[${valueSet.join('')}]`
+}
+
 export const simpleRange = (min, max) => {
   const numLength = min.length
   const minNum = parseInt(min, 10)
@@ -36,19 +45,7 @@ export const simpleRange = (min, max) => {
     values.push(valuesInPosition)
   }
 
-  console.log(values)
+  const reducedValues = values.map(x => reduceIntSet(x))
 
-
-  return [
-    '--include 0*',
-  ]
-}
-
-export const reduceIntSet = (valueSet) => {
-  if (valueSet.length === 1) {
-    return valueSet[0]
-  } else if (valueSet.length === 10) {
-    return '?'
-  }
-  return `[${valueSet.join('')}]`
+  return reducedValues.join('')
 }
