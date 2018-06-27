@@ -47,5 +47,7 @@ export const simpleRange = (min, max) => {
 
   const reducedValues = values.map(x => reduceIntSet(x))
 
-  return reducedValues.join('')
+  return [
+    `+${reducedValues.join('')}`,
+  ]
 }

@@ -10,8 +10,17 @@ describe('reduceIntSet', () => {
 })
 
 describe('simpleRange', () => {
-  it('should work', () => {
-    const result = app.simpleRange('00', '10')
-    expect(result).toEqual('0?')
+  it('should handle those needing only a single include', () => {
+    expect(app.simpleRange('0', '1')).toEqual(['+0'])
+    expect(app.simpleRange('00', '10')).toEqual(['+0?'])
+    expect(app.simpleRange('00', '50')).toEqual(['+[01234]?'])
+  })
+
+  fit('should handle those needing include and exclude', () => {
+    expect(app.simpleRange('00', '51')).toEqual([
+      '+[01234]?', // include
+      '+5[01]', // include
+      '-[56789]?', // exclude
+    ])
   })
 })
